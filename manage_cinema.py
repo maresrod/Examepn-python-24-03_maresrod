@@ -53,8 +53,10 @@ class Cinema:
         """
         for row, seat in rows_seats:
             if self.__seating[row].get(seat) is None:
-                total = total +1
+                total = total + 1
         return total
+
+
 # ------------------------------------------- MAIN -----------------------------------------------
 cinema = Cinema(rows=10, seats_per_row=8)
 
@@ -78,20 +80,26 @@ total = cinema.count_free_seats(seats, total)
 print("total: " + str(total))
 
 ''' 
-Por lo que he podido observar python crea una copia de la variable que estas pasando por parametros de manera que
+Python crea una copia de la variable que estas pasando por parametros ( cambia de namespace )  de manera que
 cuando la modificas en la funcion estas modificando la copia y no la variable con la direccion de memoria original.
 Esto se arregla devolviendo el total cuando has acabado con las operaciones.
 
-Otra solucion seria utilizar "global". O las mas elegante de todas (en mi opinion), utilizar las clases.
+Otra solucion seria utilizar "global" en la función, que no es muy comun. O las mas elegante de todas (en mi opinion), utilizar las clases.
 '''
 
 # ERROR 3: quiero modificar la butaca (2,4) de la lista anterior para que sea la (3,4) y no me deja.
 print("\n------------- Error 3 -----------------")
-seats[0][1] = 3
+seats[0] = (3, 4)
 total = 0
 total = cinema.count_free_seats(seats, total)
 print("total: " + str(total))
 
 '''
-    
+Se trata de una lista de tuplas, las tuplas en python son inmutables, no se pueden actualizar una vez creadas.
+
+Lo que si que puedes hacer llegados a este punto es borrar la antigua y asignarle una nueva. Para eso, en este caso, podemos sobreescribir
+la posicion en la lista con la tupla nueva. 
+
+Si se pretendia poder actualizar las butacas se podria haber utilizado una lista,ya que no son inmutables y no tendria que realizarse
+como se ha realizado
 '''
